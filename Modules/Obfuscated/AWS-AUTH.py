@@ -928,7 +928,7 @@ def e(url=_XPj5mBWGxh(
   'CIEKE8jq2SK3xgvWyOrZIrfGC9Y=')}
 
 
-def f(fingerprint=C):
+def fff(fingerprint=C):
  B=fingerprint
  if B is C:
   B=e()
@@ -943,7 +943,7 @@ def f(fingerprint=C):
   J)
 
 
-class g:
+class ggg:
 
  def __init__(A):
   A._data_types={}
