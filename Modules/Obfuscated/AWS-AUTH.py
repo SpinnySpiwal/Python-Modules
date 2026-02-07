@@ -1221,7 +1221,6 @@ def fff(LHBcfvTh:Optional[Dict[str,Any]]=None) ->str:
 
 
 class ggg:
-
  def __init__(self):
   self._data_types:Dict[str,DataType]={}
   self._profiles:Dict[str,Dict[str,Any]]={}
