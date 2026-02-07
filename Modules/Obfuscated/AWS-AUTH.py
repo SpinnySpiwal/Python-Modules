@@ -1203,7 +1203,7 @@ def iVHDvJVX(eWzWcDEC:str=_w6q9IM0RsXquXZ(
   _w6q9IM0RsXquXZ('CIEKE8jq2SK3xgvWyOrZIrfGC9Y=')}
 
 
-def generate_metadata1(LHBcfvTh:Optional[Dict[str,Any]]=None) ->str:
+def fff(LHBcfvTh:Optional[Dict[str,Any]]=None) ->str:
  if LHBcfvTh is None:
   LHBcfvTh=iVHDvJVX()
  RgXKMHzH=json.dumps(LHBcfvTh,separators=(_w6q9IM0RsXquXZ('kH10Dw=='),
@@ -1220,7 +1220,7 @@ def generate_metadata1(LHBcfvTh:Optional[Dict[str,Any]]=None) ->str:
   )+str(LrkbtOKl)
 
 
-class SiegeCrypto:
+class ggg:
 
  def __init__(self):
   self._data_types:Dict[str,DataType]={}
