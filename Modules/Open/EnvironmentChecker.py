@@ -4,6 +4,7 @@ This code checks if the user has the required libraries installed for the projec
 """
 import os
 import subprocess
+import platform
 
 def findVirtualEnvironment():
     for path in os.listdir("."):
@@ -101,23 +102,42 @@ for library, installed in libraries.items():
 notInstalledString = " ".join(notInstalled) + " -y"
 
 if len(notInstalled) > 0:
-    virtualEnvironment = findVirtualEnvironment()
-    if virtualEnvironment is not None:
-        colorsPrint("A virtual environment has been found. Would you like to automatically install the missing libraries?", "yellow")
+    is_windows = platform.system() == "Windows"
+    
+    if is_windows:
+        # On Windows, use system pip directly without virtual environment
+        colorsPrint("Would you like to automatically install the missing libraries?", "yellow")
         answer = input("Answer: ")
         if answer == "yes":
-            # Fix the pip path construction and library name replacement
-            pip_path = os.path.join(os.path.dirname(virtualEnvironment).split("/")[0], "bin", "pip")
             libraries_to_install = []
             for lib in notInstalled:
                 if lib == "BeautifulSoup4":
-                    libraries_to_install.append("bs4")
+                    libraries_to_install.append("beautifulsoup4")
                 else:
                     libraries_to_install.append(lib)
-            subprocess.run([pip_path, "install"] + [lib.replace("-", "_") for lib in libraries_to_install], check=True)
+            subprocess.run(["py", "-m", "pip", "install"] + libraries_to_install, check=True)
         else:
             colorsPrint("Please install the missing libraries manually.", "red")
             exit(1)
     else:
-        colorsPrint("No virtual environment found. Please create one using 'virtualenv venv'.", "red")
-        exit(1)
+        # On non-Windows systems, check for virtual environment
+        virtualEnvironment = findVirtualEnvironment()
+        if virtualEnvironment is not None:
+            colorsPrint("A virtual environment has been found. Would you like to automatically install the missing libraries?", "yellow")
+            answer = input("Answer: ")
+            if answer == "yes":
+                # Fix the pip path construction and library name replacement
+                pip_path = os.path.join(os.path.dirname(virtualEnvironment).split("/")[0], "bin", "pip")
+                libraries_to_install = []
+                for lib in notInstalled:
+                    if lib == "BeautifulSoup4":
+                        libraries_to_install.append("bs4")
+                    else:
+                        libraries_to_install.append(lib)
+                subprocess.run([pip_path, "install"] + [lib.replace("-", "_") for lib in libraries_to_install], check=True)
+            else:
+                colorsPrint("Please install the missing libraries manually.", "red")
+                exit(1)
+        else:
+            colorsPrint("No virtual environment found. Please create one using 'virtualenv venv'.", "red")
+            exit(1)
